@@ -1,0 +1,49 @@
+{% for movie in movies.results %}
+    <div class="row align-items-center g-0 bg-body-tertiary border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col-auto p-2 d-none d-lg-block">
+            <img class="img-thumbnail"  alt="" src="https://image.tmdb.org/t/p/w200/{{ movie.posterPath }}" width="120" height="170" />
+        </div>
+        <div class="col p-2 d-flex flex-column position-static">
+            <div class="row align-items-center mb-2">
+                <div class="col-auto">
+                    <div class="text-secondary">
+                        <strong>{{ movie.title }}</strong>
+                    </div>
+                </div>
+                <div class="col-auto small-ratings">
+                    {% set rate = movie.voteAverage//2 %}
+                    {% if rate < 5 and rate != 0 %}
+                        {% for i in 1..rate %}
+                            <i class="fa fa-star rating-color"></i>
+                        {% endfor %}
+                    {% endif %}
+                    {% set rate = rate+1 %}
+                    {% if rate <= 5 and rate != 0 %}
+                        {% for i in rate..5 %}
+                            <i class="fa fa-star"></i>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="col-auto">
+                    <div class="text-secondary">
+                        <small>({{ movie.voteCount }} votes)</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center mb-2">
+                <div class="text-secondary">
+                    {{ movie.releaseDate|date("Y") }}
+                </div>
+            </div>
+            <div class="row align-items-center mb-2">
+                <small>{{ movie.overview }}</small>
+            </div>
+        </div>
+        <div class="row mb-1">
+            <button class="col-lg-auto mb-3 mb-lg-0 ms-lg-auto btn btn-primary rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#modalMovie" data-movie="{{ movie.id }}" type="button">Details</button>
+        </div>
+    </div>
+    {% if loop.last and movies.page < movies.totalPages %}
+        <button id="show-more" class="btn btn-link rounded-pill px-3" type="button">Show more</button>
+    {% endif %}
+{% endfor %}

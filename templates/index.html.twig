@@ -1,0 +1,56 @@
+{% include 'base.html.twig' %}
+
+{% block javascript %}
+    {{ encore_entry_script_tags('movies') }}
+{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <div class="mb-4 rounded text-body-emphasis bg-body-secondary">
+            <div class="ratio ratio-21x9">
+                {% if bestVideo %}
+                    <iframe src="{{ bestVideo.url }}" title="{{ bestMovie.title }}" allowfullscreen></iframe>
+                {% else %}
+                    <p>Video unavailable</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row mb-2">
+            <form class="col-lg-auto mb-3 mb-lg-0 ms-lg-auto" role="search">
+                <input id="search-movie" type="search" class="form-control" placeholder="Search..." aria-label="Search">
+            </form>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-3">
+                <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+
+
+                    <div class="list-group list-group-checkable d-grid gap-2 border-0">
+                        {% for genre in genres %}
+                            <input class="movie-genre list-group-item-check pe-none" type="radio" name="listGroupCheckableRadios" id="gender-{{ genre.id }}" value="{{ genre.id }}">
+                            <label class="list-group-item rounded-3 py-3" for="gender-{{ genre.id }}">
+                                {{ genre.name }}
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div id="list-movies" class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative">
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalMovie">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

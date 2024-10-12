@@ -1,0 +1,35 @@
+<div class="mb-4 rounded text-body-emphasis bg-body-secondary">
+    <div class="ratio ratio-16x9">
+        {% if video %}
+            <iframe src="{{ video.url }}" title="{{ movie.title }}" allowfullscreen></iframe>
+        {% else %}
+            <p>Video unavailable</p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row align-items-center mb-2">
+    <div class="col-auto">
+        <div class="text-primary">
+            <a class="link-underline-light" href="{{ movie.homepage }}" target="_blank"><strong>{{ movie.title }}</strong></a>
+        </div>
+    </div>
+    <div class="col-auto small-ratings">
+        {% set rate = movie.voteAverage//2 %}
+        {% if rate < 5 and rate != 0 %}
+            {% for i in 1..rate %}
+                <i class="fa fa-star rating-color"></i>
+            {% endfor %}
+        {% endif %}
+        {% set rate = rate+1 %}
+        {% if rate <= 5 and rate != 0 %}
+            {% for i in rate..5 %}
+                <i class="fa fa-star"></i>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="col-auto text-secondary">
+        {% set average = movie.voteAverage/2%}
+        <small>{{ average | number_format(2) }} for {{ movie.voteCount }} users</small>
+    </div>
+</div>
