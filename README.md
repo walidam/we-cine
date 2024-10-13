@@ -19,6 +19,7 @@ composer install
 Run npm:
 
 ```
+npm install @symfony/webpack-encore --save-dev
 npm run build
 ```
 
