@@ -14,9 +14,9 @@ class Genres extends AbstractApi
         return $this->deserialize($response, GenresModel::class);
     }
 
-    public function getMovies($genre_id, array $parameters = [], array $headers = []): MoviesModel
+    public function getMovies($genreId, array $parameters = [], array $headers = []): MoviesModel
     {
-        $response = $this->get('genre/' . $genre_id . '/movies', $parameters, $headers);
+        $response = $this->get('genre/' . $genreId . '/movies', $parameters, $headers);
 
         return $this->deserialize($response, MoviesModel::class);
     }

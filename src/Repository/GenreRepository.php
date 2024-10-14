@@ -8,9 +8,14 @@ use App\Model\Movies as MoviesModel;
 
 class GenreRepository extends AbstractRepository
 {
+    public function __construct(Genres $api)
+    {
+        $this->api = $api;
+    }
+
     public function getApi(): Genres
     {
-        return new Genres($this->client);
+        return $this->api;
     }
 
     public function all(array $parameters = [], array $headers = []): GenresModel

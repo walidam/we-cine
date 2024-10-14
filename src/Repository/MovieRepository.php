@@ -9,9 +9,14 @@ use App\Model\Videos;
 
 class MovieRepository extends AbstractRepository
 {
+    public function __construct(Movies $api)
+    {
+        $this->api = $api;
+    }
+
     public function getApi(): Movies
     {
-        return new Movies($this->client);
+        return $this->api;
     }
 
     public function load($id, array $parameters = [], array $headers = []): MovieModel

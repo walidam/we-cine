@@ -22,9 +22,9 @@ class Movies extends AbstractApi
         return $this->deserialize($response, MoviesModel::class);
     }
 
-    public function getVideos($movie_id, array $parameters = [], array $headers = []): Videos
+    public function getVideos($movieId, array $parameters = [], array $headers = []): Videos
     {
-        $response = $this->get('movie/' . $movie_id . '/videos', $parameters, $headers);
+        $response = $this->get('movie/' . $movieId . '/videos', $parameters, $headers);
 
         return $this->deserialize($response, Videos::class);
     }
