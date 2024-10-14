@@ -16,10 +16,10 @@ install project:
 ```
 composer install
 ```
-Run npm:
+Install and run packages:
 
 ```
-npm install @symfony/webpack-encore --save-dev
+npm install
 npm run build
 ```
 
