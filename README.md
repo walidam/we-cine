@@ -1,6 +1,7 @@
 # we-movies
 An amazing app, this is a cinema website, which looks like Allocine.
 
+<img src="./archi.png">
 
 Prerequisites
 ------------

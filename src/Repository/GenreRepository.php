@@ -6,7 +6,7 @@ use App\Api\Genres;
 use App\Model\Genres as GenresModel;
 use App\Model\Movies as MoviesModel;
 
-class GenreRepository extends AbstractRepository
+class GenreRepository extends AbstractRepository implements GenreRepositoryInterface
 {
     public function __construct(Genres $api)
     {

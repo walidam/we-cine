@@ -7,7 +7,7 @@ use App\Model\Movies as MoviesModel;
 use App\Model\Movie as MovieModel;
 use App\Model\Videos;
 
-class MovieRepository extends AbstractRepository
+class MovieRepository extends AbstractRepository implements MovieRepositoryInterface
 {
     public function __construct(Movies $api)
     {

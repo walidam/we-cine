@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Repository\GenreRepository;
-use App\Repository\MovieRepository;
+use App\Repository\GenreRepositoryInterface;
+use App\Repository\MovieRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +15,7 @@ class DefaultController extends AbstractController
      * @Route("/", name="home_page")
      * @Template("index.html.twig")
      */
-    public function index(GenreRepository $genreRepository, MovieRepository $movieRepository)
+    public function index(GenreRepositoryInterface $genreRepository, MovieRepositoryInterface $movieRepository)
     {
         $genres = $genreRepository->all();
         $mostRatedMovie = $movieRepository->getMostRated();
@@ -32,7 +32,7 @@ class DefaultController extends AbstractController
      * @Route("ajax/genre/{id}/movies", name="movies_by_genre", options = { "expose" = true })
      * @Template("movie.html.twig")
      */
-    public function movies(Request $request, GenreRepository $genreRepository, $id)
+    public function movies(Request $request, GenreRepositoryInterface $genreRepository, $id)
     {
         $movies = $genreRepository->getMovies($id, ['page' => $request->query->getInt('page', 1)]);
 
@@ -45,7 +45,7 @@ class DefaultController extends AbstractController
      * @Route("ajax/movie/{id}", name="get_movie", options={ "expose" = true })
      * @Template("video.html.twig")
      */
-    public function movie(Request $request, MovieRepository $movieRepository, $id)
+    public function movie(MovieRepositoryInterface $movieRepository, $id)
     {
         $movie = $movieRepository->load($id);
         $videos = $movieRepository->getVideos($movie->getId())->getResults();
@@ -60,7 +60,7 @@ class DefaultController extends AbstractController
      * @Route("ajax/movies/search", name="search_movie", options={ "expose" = true })
      * @Template("movie.html.twig")
      */
-    public function search(Request $request, MovieRepository $movieRepository)
+    public function search(Request $request, MovieRepositoryInterface $movieRepository)
     {
         $movies = $movieRepository->searchMovies([
             'page' => $request->query->getInt('page', 1),
